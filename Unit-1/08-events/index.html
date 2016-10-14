@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html ng-app="eventsApp">
+  <head>
+    <meta charset="utf-8">
+    <title>Unit 1, Lesson 8 - Events</title>
+  </head>
+
+  <body>
+    <div ng-controller="randoNumController">
+      <h3 >The number is: {{view.number}}</h3>
+      <button ng-click="pickRandomNumber()">Pick Random Number</button>
+    </div>
+
+    <div ng-controller="wordReverser">
+      <h3>Word Reverser</h3>
+      <input type="text" ng-model="view.word">
+      <link rel="stylesheet" href="main.css">
+      <p>
+        Your word is: {{view.word}}
+      </p>
+      <button ng-click="reverseWord(view.word)">Reverse It</button>
+    </div>
+
+    <div class="pingPong" ng-controller="pingPongScorer">
+      <h3>Ping Pong Score Keeper 🏓 </h3>
+
+      <div class="scoreBoxContainer">
+        <div class="scoreBox" ng-class='{winner:player1.winner, loser:player1.loser}' ng-click="score.addScoreP1()">
+          <h4>Player 1</h4>
+          <h1>{{player1.score}}</h1>
+          <p ng-show="player1.serving">Serving!</p>
+        </div>
+
+        <div class="scoreBox"  ng-class='{winner:player2.winner, loser:player2.loser}' ng-click="score.addScoreP2()">
+          <h4>Player 2</h4>
+          <h1>{{player2.score}}</h1>
+          <p ng-show="player2.serving">Serving!</p>
+        </div>
+      </div>
+      <div class="">
+        <p>
+          gameCount: {{score.gameCount}}
+        </p>
+      </div>
+      <button class="reset" ng-click="score.reset()">Reset</button>
+    </div>
+    <div ng-controller="ColorGenerator">
+      <h3>The div was entered {{view.enterCount}} times</h3>
+      <div class="divbox" ng-mouseenter="view.randomColor()" ng-style="{'background-color': view.passColor}">
+      </div>
+      <button ng-click="view.replayColors()"> Replay Colors</button>
+    </div>
+
+    <div ng-controller="formController">
+      <form ng-submit="submitFav()" name="favPieForm">
+        <input name="name" type="text" ng-model="favoriteForm.name">
+        <input name="favorite_pie" type="text" ng-model="favoriteForm.favoritePie">
+        <input type="submit">
+      </form>
+      Name: {{favoriteForm.name}}<br>
+      Favorite Pi: {{favoriteForm.favoritePie}}
+    </div>
+
+    <div ng-controller="addressController">
+      <h1>Address Book</h1>
+      <form ng-submit="initialcontactForm.clearForm()">
+        <label for="street1">Street 1</label>
+        <input type="text" id="street1" ng-model="initialcontactForm.street1 ">
+        <label for="street2">Street 2</label>
+        <input type="text" id="street2" ng-model="initialcontactForm.street2 ">
+        <label for="city">City</label>
+        <input type="text" id="city" ng-model="initialcontactForm.city">
+        <label for="state">State</label>
+        <input type="text" id="state" ng-model="initialcontactForm.state">
+        <label for="zip">Zip</label>
+        <input type="text" id="zip" ng-model="initialcontactForm.zip">
+        <input type="submit">
+      </form>
+      <div>
+        <h3>Display Info Take From User</h3>
+        <div class="">
+          {{initialcontactForm.street1}}
+          {{initialcontactForm.street2}}
+          {{initialcontactForm.city}}
+          {{initialcontactForm.state}}
+          {{initialcontactForm.zip}}
+        </div>
+      </div>
+
+      <!-- <div ng-controller="contactController">
+        <h1>ContactsApp</h1>
+        <form ng-submit="submitAddy()" name="contactsForm">
+          <label for="name">Name</label>
+          <input type="text" id="name" ng-model="addyForm.name">
+          <label for="email">Email</label>
+          <input type="text" id="email" ng-model="addyForm.name">
+          <label for="phone">Phone</label>
+          <input type="text" id="phone" ng-model="addyForm.name">
+          <input type="submit">
+          <br>
+          <label for="search">Search</label>
+          <input type="text" id="search" ng-model="addyForm.name">
+        </form>
+      </div>
+
+      <table class="table table-bordered">
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>Email</th>
+            <th>Phone</th>
+          </tr>
+        </thead>
+        <tbody>
+         <tr ng-repeat="contact in view.contacts | filter: searchText">
+        </tbody>
+      </table>
+    </div> -->
+
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.8/angular.min.js"></script>
+  <script src="app.js"></script>
+  </body>
+</html>
