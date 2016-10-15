@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html ng-app="animateApp">
+  <head>
+    <meta charset="utf-8">
+    <title>Unit 1, Lesson 10 - Animate</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.4.0/animate.min.css">
+    <link href="http://netdna.bootstrapcdn.com/bootswatch/3.1.1/yeti/bootstrap.min.css" rel="stylesheet" media="screen">
+
+    <link rel="stylesheet" href="main.css" media="screen" title="no title">
+  </head>
+  <body ng-controller="MainController">
+    <div class="container">
+      <div ng-if="toggleBoolean">
+          Fade me!
+      </div>
+      <!-- <input type="text" ng-model="name"> -->
+      <!-- <div ng-hide="name == 'Elie'">
+        You're not Elie!
+      </div>
+      <div ng-show="name == 'Elie'">
+        Hi Elie!
+      </div> -->
+      <input type="text" ng-model="view.search">
+      <div ng-repeat ="instructor in view.instructors | filter:view.search">
+        {{instructor}}
+      </div>
+      <button ng-click="toggleBoolean = !toggleBoolean">
+        Toggle fade
+      </button>
+      <div ng-controller="animateController">
+        <h1>Angular Animation - part 1</h1>
+        <br>
+        <br>
+        <!-- on click, fade is set to true, adding it to the DOM -->
+        <button type="button" class="btn btn-primary" ng-click="fade = !fade">Toggle Opacity</button>
+        <h2 ng-class="{fade:fade}">Hello World!</h2>
+        <br>
+        <p>Value of fade: <strong>{{fade}}</strong>
+        </p>
+      </div>
+    </div>
+  <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular.js"></script>
+  <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular-animate.js"></script>
+  <script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+  <script src="http://netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
+  <script src="app.js"></script>
+  </body>
+</html>

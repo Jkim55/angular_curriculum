@@ -66,7 +66,6 @@ angular.module("eventsApp").controller('pingPongScorer', (($scope) => {
   }
 
   $scope.score.addScoreP1 = () => {
-    // $scope.score.initalizeGame()
     $scope.score.gameCount++
     $scope.score.findServer()
     if ($scope.score.gameCount > 11 ){
@@ -80,7 +79,6 @@ angular.module("eventsApp").controller('pingPongScorer', (($scope) => {
   }
 
   $scope.score.addScoreP2 = () => {
-    // $scope.score.initalizeGame()
     $scope.score.findServer()
     $scope.score.gameCount++
     if ($scope.score.gameCount > 11 ){
