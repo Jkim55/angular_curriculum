@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html ng-app="myApp">
+  <head>
+    <meta charset="utf-8">
+    <title>Unit 1 - Exercise 4</title>
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+    <!-- Optional theme -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+    <link rel="stylesheet" href="main.css" media="screen" title="no title">
+  </head>
+  <body ng-cloak>
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-6 input-group input-group-sm">
+          <h1>Tell Me Something Good! 🗣 </h1>
+          <input class="form-control" type="text" ng-model="words">
+          <p>
+            SHOUTY VERSION:
+            <span>{{ words | uppercase }}</span>
+          </p>
+          <p>
+            QUIET VERSION:
+            <span>{{ words | lowercase }}</span>
+          </p>
+        </div>
+
+        <div class="col-lg-6 input-group input-group-sm">
+            <h3>How many digits of PI would you like:</h3>
+              <select id="num" class="btn btn-default" name="num" ng-model="digits">
+                <option>1</option>
+                <option>2</option>
+                <option>3</option>
+                <option>4</option>
+                <option>5</option>
+                <option>6</option>
+                <option>7</option>
+              </select>
+
+              <p>
+                Here you go, the first
+                <ng-pluralize count="digits"
+                when="{
+                  '1': '1 digit',
+                  'other': '{{digits}} digits'}">
+                </ng-pluralize>
+                of pi.
+                <span>{{ 3.14159265359 | number: digits }} </span>
+              </p>
+            </p>
+        </div>
+
+        <div>
+          <h1>Super Useful Tip Calculator</h1>
+          <h3>How much did your meal cost?</h3>
+          <input type="number" ng-model="subtotal">
+
+          <h3>How much do you want to tip?</h3>
+            <select id="num" class="btn btn-default" name="num" ng-model="tip">
+              <option value=".1">10%</option>
+              <option value=".15">15%</option>
+              <option value=".20">20%</option>
+            </select>
+            <h3 ng-hide="!subtotal">
+              Subtotal: {{subtotal | currency }}
+            </h3>
+            <h3 ng-hide="!tip && !subtotal">
+              Tip: {{ subtotal * tip | currency }}
+            </h3>
+        </div>
+
+        <div>
+          <h3>
+            The value of 'this' in ng-app is the : {{this}}
+          </h3>
+        </div>
+
+        <div>
+            <h1>Angular MAD Libs</h1>
+            <form>
+              <div>
+                <label for="boyName">Boy's Name</label>
+                <input type="text" id="boyName" ng-model='name'>
+              </div>
+              <div>
+                <label for="adjective">Adjective</label>
+                <input type="text" id="adjective" ng-model='adj'>
+              </div>
+              <div>
+                <label for="pNoun1">Plural Noun</label>
+                <input type="text" id="pNoun1" ng-model='noun1'>
+              </div>
+              <div>
+                <label for="pNoun2">Plural Noun</label>
+                <input type="text" id="pNoun2" ng-model='noun2'>
+              </div>
+              <div>
+                <label for="insect">Insect (Plural)</label>
+                <input type="text" id="insect" ng-model='insect'>
+              </div>
+              <div>
+                <label for="pNoun3">Plural Noun</label>
+                <input type="text" id="pNoun3" ng-model='noun3'>
+              </div>
+              <div>
+                <label for="verb">Verb (Present Tense)</label>
+                <input type="text" id="verb" ng-model='verb'>
+              </div>
+            </form>
+            <div ng-hide="!verb">
+              <h2>Your Mad Libs</h2>
+              <h3>
+                I'm in love with <span>{{name | uppercase}}</span>. He's so <span>{{adj | uppercase}}</span>! He has big flat <span>{{noun1 | uppercase}}</span>, and when our <span>{{noun2 | uppercase}}</span> meet, I get <span>{{insect | uppercase}}</span> in my stomach. I've fallen for him like a ton of <span>{{noun3 | uppercase}}</span>, and he <span>{{verb | uppercase}}</span> for me, too. But I think he's got another girlfriend. What should I do?
+              </h3>
+            </div>
+        </div>
+      </div>
+    </div>
+    <!-- Latest compiled and minified JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.8/angular.min.js"></script>
+    <script type="text/javascript" src="app.js"></script>
+  </body>
+</html>

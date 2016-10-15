@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html ng-app="firstApp">
+  <head>
+    <meta charset="utf-8">
+    <title>Unit 1, Lesson 6 - Controllers</title>
+    <link rel="stylesheet" href="main.css" media="screen" title="no title">
+  </head>
+  <body>
+
+    <div ng-controller="MyFirstController">
+      <h1 ng-cloak>My name is: {{name}}</h1>
+      <input ng-model="name" type="text" placeholder="What is your name">
+    </div>
+
+    <div ng-controller="ExercisesController" ng-cloak>
+      <h1>
+        My Favorite color is {{favColor}}
+      </h1>
+      <h1>
+        There are {{secondsInACentury()}} seconds in a century
+      </h1>
+
+      <h1 ng-cloak>
+        Today is {{rightNow | date:'EEEE, MMMM dd, yyyy'}}
+      </h1>
+    </div>
+
+
+
+      <div ng-controller="madLibsController">
+        <form>
+          <h1>Please fill out the following!</h1>
+          <label for="boys-name">Boy's Name</label>
+          <input type="text" id="boys-name" ng-model="madLibData.boyName">
+        </br>
+          <label for="adj">Adjective</label>
+          <input type="text" id="adj" ng-model="madLibData.adj">
+        </br>
+          <label for="pNoun1">Plural Noun</label>
+          <input type="text" id="pNoun1" ng-model="madLibData.noun1">
+        </br>
+          <label for="pNoun2">Plural Noun</label>
+          <input type="text" id="pNoun2" ng-model="madLibData.noun2">
+        </br>
+          <label for="insect">Insect (Plural)</label>
+          <input type="text" id="insect" ng-model="madLibData.insect">
+        </br>
+          <label for="pNoun3">Plural Noun</label>
+          <input type="text" id="pNoun3" ng-model="madLibData.noun3">
+        </br>
+          <label for="verb">Verb (Present Tense)</label>
+          <input type="text" id="verb" ng-model="madLibData.verb">
+        </br>
+        <button type="button" ng-click="toggleLibs()">
+          <!-- ng-click should only take functions -->
+          Generate
+        </button>
+      </form>
+      <div ng-show="showLibs">
+        <h2>Mad with the Libs</h2>
+        <h3>
+          I'm in love with <span>{{madLibData.boyName | uppercase}}</span>.
+           He's so <span>{{madLibData.adj | uppercase}}</span>! He has big flat <span>{{d.noun1 | uppercase}}</span>, and when our <span>{{madLibData.noun2 | uppercase}}</span> meet, I get <span>{{madLibData.insect | uppercase}}</span> in my stomach. I've fallen for him like a ton of <span>{{madLibData.noun3 | uppercase}}</span>, and he <span>{{madLibData.verb | uppercase}}</span> for me, too. But I think he's got another girlfriend. What should I do?
+        </h3>
+        <button type="button" ng-click="reset()">
+          Play Again
+        </button>
+      </div>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.8/angular.min.js"></script>
+    <script src="app.js"></script>
+  </body>
+</html>

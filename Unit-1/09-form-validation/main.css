@@ -1,0 +1,31 @@
+.glowing-border {
+border: 2px solid #dadada;
+border-radius: 7px;
+}
+
+.glowing-border:focus {
+outline: none;
+border-color: #9ecaed;
+box-shadow: 0 0 10px #9ecaed;
+}
+
+.has-error {
+  color: #ff0000;
+  border-color: #ff0000;
+}
+
+.has-error:focus {
+  outline: none;
+  border-color: #ff0000;
+  box-shadow: 0 0 10px #ff0000;
+}
+.has-success {
+  color:#3fbf6a;
+  border-color: #3fbf6a;
+}
+
+.has-success:focus {
+outline: none;
+border-color: #3fbf6a;
+box-shadow: 0 0 10px #3fbf6a;
+}

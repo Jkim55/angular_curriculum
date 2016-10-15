@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html ng-app="u1l5App">
+  <head>
+    <meta charset="utf-8">
+    <title>Directives</title>
+  </head>
+  <body ng-controller="u1l5-Controller">
+    <link rel="stylesheet" href="main.css" media="screen" title="no title">
+  <!-- <body ng-init="names=['Harry', 'Ron', 'Hermione', 'Sirius', 'Hedwig', 'Tonks']; symbols=['Spades', 'Clubs', 'Hearts', 'Diamonds']"> -->
+    <div>
+      <ul>
+        <li ng-repeat='name in names'>
+          {{name}}
+        </li>
+      </ul>
+    </div>
+
+    <div >
+<!-- ng-init="symbols = ['&spades;', '&clubs;', '&hearts;', '&diams;']" -->
+      <ul>
+        <li ng-repeat='symbol in symbols'>
+          {{symbol}}
+        </li>
+      </ul>
+    </div>
+    <div>
+      <ul>
+        <li ng-repeat="number in numbers track by $index">{{number}}</li>
+      </ul>
+    </div>
+    <div>
+      <ul>
+        <li ng-repeat="person in people">{{person.name}} {{person.age}}</li>
+      </ul>
+    </div>
+    <div>
+      <div ng-show='3 + 4 == 5'>
+        3 + 4 isn't 5, don't show
+      </div>
+
+      <div ng-show='3 + 4 == 7'>
+        3 + 4 is 7, do show
+      </div>
+
+      <div ng-hide='3 + 4 == 5'>
+        3 + 4 isn't 5, don't hide
+      </div>
+
+      <div ng-hide='3 + 4 == 7'>
+        3 + 4 is 7, do hide
+      </div>
+    </div>
+
+    <div>
+      <h1>Sign Up Page</h1>
+      <input type="password" ng-model="password">
+      <p class= "passBad" ng-class="{passOK: password.length>=6}">
+        Your password is {{password.length}}
+        <ng-pluralize count="password.length"
+        when="{
+          '0`': 'charcter',
+          '1': 'charcter',
+          'other': 'characters'}">
+        </ng-pluralize>
+      </p>
+      <p ng-hide="password.length>=6">
+        You need at least 6 characters!
+      </p>
+      <button type="button" ng-show="password.length>=6" name="button">OKKKKAY</button>
+    </div>
+
+    <div ng-class='{highlight: 4 + 4 == 8}'> 4 + 4 = 8</div>
+    <div ng-class='{highlight: 4 + 4 == 10}'> 4 + 4 = 10</div>
+
+    <div>
+      <h1>Camera Shop</h1>
+      <select ng-model="sortOptions">
+        <option value="rating">Rating</option>
+        <option value="price">Price</option>
+      </select>
+      <div ng-repeat='camera in cameras | orderBy:sortOptions'>
+        <h4>{{camera.title}}</h4>
+        <img ng-src="{{camera.image}}"/>
+        <p ng-class='{saleHighlight: camera.onSale}'>
+          Price: {{camera.price | currency}}
+        </p>
+        <p>
+          Rating: {{camera.rating | number: 1}}
+        </p>
+      </div>
+    </div>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.8/angular.min.js"></script>
+    <script src="app.js"></script>
+  </body>
+</html>

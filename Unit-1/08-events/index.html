@@ -63,60 +63,71 @@
 
     <div ng-controller="addressController">
       <h1>Address Book</h1>
-      <form ng-submit="initialcontactForm.clearForm()">
+      <form ng-submit="addyFormData.clearForm()">
         <label for="street1">Street 1</label>
-        <input type="text" id="street1" ng-model="initialcontactForm.street1 ">
+        <input type="text" id="street1" ng-model="addyFormData.street1 ">
         <label for="street2">Street 2</label>
-        <input type="text" id="street2" ng-model="initialcontactForm.street2 ">
+        <input type="text" id="street2" ng-model="addyFormData.street2 ">
         <label for="city">City</label>
-        <input type="text" id="city" ng-model="initialcontactForm.city">
+        <input type="text" id="city" ng-model="addyFormData.city">
         <label for="state">State</label>
-        <input type="text" id="state" ng-model="initialcontactForm.state">
+        <input type="text" id="state" ng-model="addyFormData.state">
         <label for="zip">Zip</label>
-        <input type="text" id="zip" ng-model="initialcontactForm.zip">
+        <input type="text" id="zip" ng-model="addyFormData.zip">
         <input type="submit">
       </form>
       <div>
         <h3>Display Info Take From User</h3>
         <div class="">
-          {{initialcontactForm.street1}}
-          {{initialcontactForm.street2}}
-          {{initialcontactForm.city}}
-          {{initialcontactForm.state}}
-          {{initialcontactForm.zip}}
+          {{addyFormData.street1}}
+          {{addyFormData.street2}}
+          {{addyFormData.city}}
+          {{addyFormData.state}}
+          {{addyFormData.zip}}
         </div>
       </div>
 
-      <!-- <div ng-controller="contactController">
-        <h1>ContactsApp</h1>
-        <form ng-submit="submitAddy()" name="contactsForm">
-          <label for="name">Name</label>
-          <input type="text" id="name" ng-model="addyForm.name">
-          <label for="email">Email</label>
-          <input type="text" id="email" ng-model="addyForm.name">
-          <label for="phone">Phone</label>
-          <input type="text" id="phone" ng-model="addyForm.name">
-          <input type="submit">
-          <br>
-          <label for="search">Search</label>
-          <input type="text" id="search" ng-model="addyForm.name">
-        </form>
-      </div>
+      <div ng-controller="contactController">
 
-      <table class="table table-bordered">
-        <thead>
-          <tr>
-            <th>Name</th>
-            <th>Email</th>
-            <th>Phone</th>
-          </tr>
-        </thead>
-        <tbody>
-         <tr ng-repeat="contact in view.contacts | filter: searchText">
-        </tbody>
-      </table>
-    </div> -->
+        <h1>Contacts App</h1>
+        <div>
+          <form ng-submit="contactApp.submit()" name="contactsForm">
+            <label for="name">Name</label>
+            <input type="text" id="name" ng-model="contactApp.name">
+            <label for="email">Email</label>
+            <input type="text" id="email" ng-model="contactApp.email">
+            <label for="phone">Phone</label>
+            <input type="text" id="phone" ng-model="contactApp.phone">
+            <input type="submit">
+          </form>
+          <form>
+            <label for="search">Search</label>
+            <input type="text" id="search" ng-model="contactApp.searchText">
+          </form>
+        </div>
+        <div>
+          <table>
+            <thead>
+              <tr>
+                <th>Name</th>
+                <th>Email</th>
+                <th>Phone</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr ng-repeat="contact in contactApp.contacts | filter: contactApp.searchText">
+                <td>{{contact.name}}</td>
+                <td>{{contact.email}}</td>
+                <td>{{contact.phone}}
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
 
+    </div>
+
+    </div>
   <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.8/angular.min.js"></script>
   <script src="app.js"></script>
   </body>

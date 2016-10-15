@@ -1,0 +1,23 @@
+.highlight {
+  background-color: yellow;
+}
+
+.passBad {
+  color: #ff0707;
+}
+
+.passOK {
+  color: #3fbf6a;
+}
+
+.saleHighlight{
+  color:#f5c703
+}
+
+img {
+  height: 150px;
+}
+
+[ng\:cloak], [ng-cloak], .ng-cloak {
+  display: none !important;
+}

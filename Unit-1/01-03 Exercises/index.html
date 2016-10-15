@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html ng-app="myApp">
+  <head>
+    <meta charset="utf-8">
+    <title>{{ greeting }} World! </title>
+  </head>
+  <body>
+    <h1>Math by Angular: 1 + 3 = {{ 1 + 3 }}</h1>
+    <p>Say something awesome!</p>
+    <div>
+      <input type="text" ng-model="greeting" ng-init="greeting = 'Hello'">
+    </div>
+      <p>{{ greeting }} World!</p>
+      <input type="text" ng-model="name" ng-init="name = 'Jane Doe'">
+      <p> My name is : {{ name }}</p>
+      <!-- JQUERY VERSION OF THE ABOVE -->
+      <!-- <script>
+      document.addEventListener('DOMContentLoaded', function () {
+      document.querySelector('[name=auto]').addEventListener('input', function (e) {
+      document.querySelector('#output').innerHTML = e.target.value
+    });
+  });
+</script>
+</head>
+<body>
+<input type="text" name="auto" value="">
+<p id="output"></p> -->
+
+      <h2>Which do you prefer for a pet?</h2>
+      <select ng-model="pets">
+        <option>dogs 🐶 </option>
+        <option>cats 😼 </option>
+        <option>either! 🔥 </option>
+        <option>neither cause I'm dead inside 💀 </option>
+      </select>
+
+      <!-- <h3 ng-hide="!pets" >I love {{pets}} <3 </h3> -->
+      <h3 ng-hide="!pets">I love <span ng-bind="pets"></span></h3>
+
+      <h2>Currency Filter in Angular</h2>
+      <input type="number" ng-model="salesRack">
+      <p> Sales Price: {{salesRack | currency}} </p>
+      <p> Sales Price: {{salesRack | currency:'€':0}} </p>
+
+      <h2>Date Filter in Angular</h2>
+      <input type="date" ng-model="userDate">
+      <p> Date Filter: {{userDate | date}} </p>
+
+      <h2>Filter Filter in Angular</h2>
+      <input type="text" ng-model="myArray">
+      <p> Sales Price: {{myArray | filter}} </p>
+
+      <h2>JSON Filter in Angular</h2>
+      <input type="text" ng-model="jsObj">
+      <p> Sales Price: {{jsObj | json}} </p>
+
+      <div ng-controller="personCtrl">
+      <p>The name is {{ firstName | uppercase }} {{ lastName | lowercase }}</p>
+      </div>
+
+      <div ng-controller="orderCtrl">
+        <p>Looping with objects:</p>
+        <input type="text" ng-model="test"></p>
+          <ul>
+            <!-- <li ng-repeat="x in names | orderBy:'country' | filter : 'i'"> -->
+            <li ng-repeat="x in names | orderBy:'country' | filter : test">
+              {{ x.name + ', ' + x.country }}
+            </li>
+          </ul>
+      </div>
+
+
+      <p>Click the table headers to change the sorting order:</p>
+
+      <div ng-app="myApp" ng-controller="namesTableCtrl">
+        <table border="1" width="100%">
+          <tr>
+            <th ng-click="orderByMe('index')">Count</th>
+            <th ng-click="orderByMe('name')">Name</th>
+            <th ng-click="orderByMe('country')">Country</th>
+          </tr>
+          <tr ng-repeat="x in names | orderBy:myOrderBy">
+            <td>{{names.indexOf(x) + 1}}</td>
+            <td>{{x.name}}</td>
+            <td>{{x.country}}</td>
+          </tr>
+        </table>
+      </div>
+      <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.8/angular.min.js"></script>
+      <script type="text/javascript" src="app.js"></script>
+  </body>
+</html>
+
+<!-- NG Mode
+NG model is a directive that binds an input, select, textarea (or custom form control) to a property on the scope using the ngModelController. Responsible to binding view into the model which other directives such as input, textarea, or select, require. -->
+
+<!-- Dirty Checking
+Angular defines a concept of a so called digest cycle. This cycle can be considered as a loop, during which Angular checks if there are any changes to all the variables watched by all the $scopes. So if you have $scope.myVar defined in your controller and this variable was marked for being watched, then you are explicitly telling Angular to monitor the changes on myVar in each iteration of the loop. -->
+
+<!-- Two Way Data Binding
+when a model changes, the view knows about it.
+when a view changes, the model also knows about it. -->

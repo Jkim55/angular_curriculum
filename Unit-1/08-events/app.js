@@ -95,7 +95,7 @@ angular.module("eventsApp").controller('pingPongScorer', (($scope) => {
 }))
 
 
-angular.module("eventsApp").controller("ColorGenerator", ($scope)=> {
+angular.module("eventsApp").controller("ColorGenerator", ($scope, $timeout)=> {
   $scope.view = {}
   $scope.view.enterCount = 0
   $scope.view.passColor = "black"
@@ -109,22 +109,41 @@ angular.module("eventsApp").controller("ColorGenerator", ($scope)=> {
     let z1 = z.substring(0,y);
     let color = "#" + z1 + x;
     $scope.view.colorArray.push(color)
+    console.log('pre replay', $scope.view.colorArray);
     $scope.view.passColor = color
   }
   $scope.view.incrementCounter = () => {
     $scope.view.enterCount++
   }
 
-  $scope.view.replayColors = function() {
-    for (let i = $scope.view.colorArray.length-1; i>=0; i--) {
-      color = $scope.view.colorArray[i]
-      // angular.$timeout(function() {
-      //   return true
-      // }, 1000)
-// for each item in colorArray, display it for 1 sec
+// recusive method
+  $scope.view.replayColors = () => {
+    let index = $scope.view.colorArray.length-1
+    let displayPreviousColor = () => {
+      $scope.view.passColor = $scope.view.colorArray[index]
+      index--
+      if (index >= 0){
+        $timeout(displayPreviousColor, 1000)
+      }
     }
-  }
-})
+    displayPreviousColor()
+}})
+
+//iterative
+// $scope.view.replay = function() {
+//   $scope.view.reversedArray = $scope.view.colorArray.reverse()
+//   for( var i = 0; i < $scope.view.reversedArray.length; i++) {
+//       (function(i){
+//       $timeout( function(){
+//           $scope.view.callAtTimeout($scope.view.reversedArray[i]);
+//       }, i * 1000);
+//       })(i)
+//   }
+//   $scope.view.callAtTimeout = function(elementColor) {
+//       $scope.view.passColor = elementColor;
+//   }
+// }
+
 
 angular.module("eventsApp").controller("formController", ($scope) =>{
   $scope.favoriteForm = {};
@@ -140,33 +159,53 @@ angular.module("eventsApp").controller("formController", ($scope) =>{
 })
 
 angular.module("eventsApp").controller('addressController', ($scope) => {
-  $scope.initialcontactForm = {};
-  $scope.initialcontactForm.clearForm = () => {
-    $scope.initialcontactForm.street1 = '';
-    $scope.initialcontactForm.street2 = '';
-    $scope.initialcontactForm.city = '';
-    $scope.initialcontactForm.state = '';
-    $scope.initialcontactForm.zip = '';
+  $scope.initial = {
+    street1: "",
+    street2: "",
+    city:"",
+    state: "",
+    zip: ""
+  };
+
+  $scope.addyFormData = angular.copy($scope.initial);
+
+  $scope.addyFormData.clearForm = () => {
+    $scope.addyFormData = angular.copy($scope.initial);
   }
 })
 
 
-   angular.module("eventsApp").controller('contactController', ($scope) => {
-     $scope.view.contact = [];
-     $scope.initialcontactForm = {};
+angular.module("eventsApp").controller('contactController', ($scope) => {
+  $scope.initial = {
+    name: "",
+    email: "",
+    phone: ""
+  }
 
-     $scope.addContact = function (){
-       var contact = {
-         name: $scope.initialcontactForm.name,
-         email: $scope.initialcontactForm.email,
-         phone: $scope.initialcontactForm.phone
-       }
-       $scope.initialcontactForm.name = '';
-       $scope.initialcontactForm.email = '';
-       $scope.initialcontactForm.phone = '';
+  $scope.contactApp = angular.copy($scope.initial)
+  $scope.contactApp.contacts = []
 
-       $scope.view.contact.push(contact)
-     }
+  $scope.contactApp.clearForm = () => {
+    $scope.contactApp = angular.copy($scope.initial);
+  }
+
+  $scope.contactApp.addContact = function (){
+    let contact = {
+      name: $scope.contactApp.name,
+      email: $scope.contactApp.email,
+      phone: $scope.contactApp.phone
+    }
+    $scope.contactApp.contacts.push(contact)
+    console.log('added contact', $scope.contactApp.contacts);
+  }
+
+  $scope.contactApp.submit = () => {
+    $scope.contactApp.addContact()
+    $scope.contactApp.name = ""
+    $scope.contactApp.email = ""
+    $scope.contactApp.phone = ""
+    console.log($scope.contactApp.contacts);
+  }
 })
 
 
@@ -174,3 +213,4 @@ angular.module("eventsApp").controller('addressController', ($scope) => {
 // slow down to speed up! Brooks
 // Tortoise v Hare programming
 // synchronous blocking brooks method of programming x-P Taylor
+// sanity check: check that you can access angular expressions

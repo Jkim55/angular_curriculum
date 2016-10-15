@@ -1,0 +1,11 @@
+[ng-cloak] {
+  /*display: none !important;*/
+  opacity: 0;
+}
+
+/* this is more correct by XML standard, but ugly: [ng\:cloak]
+Angular is okay with [attributes] */
+
+body {
+  transition: opacity 1s;
+}

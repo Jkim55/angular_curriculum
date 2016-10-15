@@ -1,21 +1,83 @@
 <!DOCTYPE html>
-<html>
+<html ng-app="validationApp">
   <head>
     <meta charset="utf-8">
     <title>Unit 1, Lesson 09 - Form Validation</title>
     <link rel="stylesheet" href="main.css" media="screen" title="no title">
   </head>
-  <body>
-    <!-- void(0) is just the smallest script possible that evaluates as undefined -->
-    <form action="javascript:void(0)">
+  <body ng-controller = "userFormController">
+    <!-- <h1>Sign Up Form</h1>
+    <form action="#">
       <label for="firstName">First Name:</label>
       <input type="text" id="firstName" required>
+
       <label for="lastName">Last Name:</label>
       <input type="text" id="lastName" required>
-      <input type="submit" value="Click me!">
-    </form>
 
-  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.8/angular.min.js"></script>
+      <input type="submit" value="Click me!">
+    </form> -->
+
+    <div>
+      <form ng-submit="userForm.submit(myForm)" name="myForm" novalidate>
+        <label for="Username" ng-class="{'has-error': myForm.username.$invalid && myForm.username.$dirty, 'has-success': myForm.username.$valid}">Username</label>
+        <input type="text" id="Username" name="username" ng-model="userForm.username" ng-minlength="3" ng-maxlength="12" class="glowing-border" ng-class="{'has-error': myForm.username.$invalid && myForm.username.$dirty, 'has-success': myForm.username.$valid}" required>
+
+        <div ng-show="myForm.username.$invalid && myForm.username.$dirty">
+            <p ng-show="myForm.username.$error.minlength">Your name is too short.</p>
+            <p ng-show="myForm.username.$error.maxlength">Your name is too long.</p>
+            <p ng-show="myForm.username.$error.required">Your name is required.</p>
+        </div>
+
+        <label for="Password" ng-class="{'has-error': myForm.password.$invalid && myForm.password.$dirty, 'has-success': myForm.password.$valid}">Password</label>
+        <input type="password" name="password" id="Password" ng-model="userForm.password" ng-minlength="3" ng-maxlength="12" class="glowing-border" ng-class="{'has-error': myForm.password.$invalid && myForm.password.$dirty, 'has-success': myForm.password.$valid}" required>
+
+        <div ng-show="myForm.password.$invalid && myForm.password.$dirty">
+          <p ng-show="myForm.password.$error.minlength">Password is too short.</p>
+          <p ng-show="myForm.password.$error.maxlength">Password is too long.</p>
+          <p ng-show="myForm.password.$error.required">Your password is required.</p>
+        </div>
+
+        <label for="Email" ng-class="{'has-error': myForm.email.$invalid && myForm.email.$dirty, 'has-success': myForm.email.$valid}">Email</label>
+        <input type="email" id="Email" name="email" ng-model="userForm.email" class="glowing-border" ng-class="{'has-error': myForm.email.$invalid && myForm.email.$dirty, 'has-success': myForm.email.$valid}" required>
+
+        <div>
+          <p ng-show="myForm.email.$invalid && myForm.email.$dirty">Please enter a valid email address.</p>
+        </div>
+
+        <label for="Zip" ng-class="{'has-error': myForm.zip.$invalid && myForm.zip.$dirty, 'has-success': myForm.zip.$valid}">Zip (5 Digits)</label>
+        <input type="number" id="Zip" name="zip" ng-model="userForm.zip" ng-pattern="/^(\d{5}(-\d{4})?|[A-Z]\d[A-Z] *\d[A-Z]\d)$/" class="glowing-border" ng-class="{'has-error': myForm.zip.$invalid && myForm.zip.$dirty, 'has-success': myForm.zip.$valid}" required>
+
+        <div>
+        <p ng-show="myForm.zip.$invalid && myForm.zip.$dirty">Please enter a valid zip code!</p>
+        </div>
+
+        <input type="submit" value="SUBMIT" ng-disabled="myForm.$invalid">
+      </form>
+    </div>
+
+    <div ng-show="userForm.usersExist">
+      {{}}
+      <h1>User List</h1>
+      <table>
+        <thead>
+          <tr>
+            <th>Username</th>
+            <th>Email</th>
+            <th>Zip</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr ng-repeat="user in userForm.users">
+            <td>{{user.username}}</td>
+            <td>{{user.email}}</td>
+            <td>{{user.zip}}
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular.js"></script>
   <script src="app.js"></script>
   </body>
 </html>
