@@ -112,7 +112,11 @@
               <span> | </span>
               <span ng-click="toggleComments(post)">
                 <i class="fa fa-comment" aria-hidden="true"></i>
-                {{post.comments.length}} comments
+                {{post.comments.length}}
+                <ng-pluralize count="post.comments.length"
+                when="{
+                  '1': 'comment',
+                  'other': 'comments'}">
               </span>
               <span> | </span>
               <span ng-click="toggleCommentForm()">
@@ -121,8 +125,8 @@
               </span>
             </p>
           </div>
-          <!-- If (comments.length = 0), don't show comments div -->
-          <div class="comment-block" ng-show="post.viewcomments">
+
+          <div class="comment-block" ng-show="post.viewcomments && post.comments.length > 0">
             <div ng-repeat="comment in post.comments">
               <p class="comment-single">
                 {{comment.author}} - {{comment.text}}
