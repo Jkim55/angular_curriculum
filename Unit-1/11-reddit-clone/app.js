@@ -5,6 +5,7 @@ angular.module("redditCloneApp").controller("redditController", ($scope) => {
   $scope.view = {}
 
   $scope.view.newPostForm = false
+  $scope.view.newcommentForm = false
   $scope.view.category = ""
   $scope.view.categorydefault = "-date"
 
@@ -47,6 +48,7 @@ angular.module("redditCloneApp").controller("redditController", ($scope) => {
   $scope.submitNewPost = (form) => {
     $scope.addNewPost()
     form.$setPristine()
+    form.$setUntouched()
     $scope.post.restaurant = "",
     $scope.post.chef = "",
     $scope.post.author = "",
@@ -55,17 +57,30 @@ angular.module("redditCloneApp").controller("redditController", ($scope) => {
     $scope.togglePostForm()
   }
 
-  $scope.addComment = () => {
+  $scope.addNewComment = (post) => {
+    console.log("post #1", $scope.view.posts[0]);
     let newComment = {
-      author: "",
-      text: ""
+      author: post.comments.author,
+      text: post.comments.text
     }
-    console.log(newComment)
-    $scope.post.comments.push(newComment)
+    console.log(newComment);
+    post.comments.push(newComment)
   }
 
+  $scope.submitComment = (form, post) => {
+    $scope.addNewComment(post)
+    console.log(form);
+    form.$setPristine()
+    form.$setUntouched()
+    post.comments.author = "",
+    post.comments.text= "",
+    $scope.toggleCommentForm()
+  }
   $scope.toggleComments = (post) => {
     post.viewcomments = !post.viewcomments
+  }
+  $scope.toggleCommentForm = () => {
+    $scope.view.newcommentForm = !$scope.view.newcommentForm
   }
 
 // SOME DUMMY DATA
@@ -80,7 +95,7 @@ angular.module("redditCloneApp").controller("redditController", ($scope) => {
       votes: 4,
       comments:[{
           author:"dasjfhkh",
-          text: "askdfjaksdf"
+          text: "askdfjaksdfadd"
         },
         {
           author:"aldkjflasz",
@@ -114,7 +129,7 @@ angular.module("redditCloneApp").controller("redditController", ($scope) => {
       description: "Beetroot water spinach okra water chestnut ricebean pea catsear courgette summer purslane. Water spinach arugula pea tatsoi aubergine spring onion bush tomato kale radicchio turnip chicory salsify pea sprouts fava bean. Dandelion zucchini burdock yarrow chickpea dandelion sorrel courgette turnip greens tigernut soybean radish artichoke wattle seed endive groundnut broccoli arugula.",
       date: "2016-09-27T07:35:34.693Z",
       votes: 0,
-      comments:[],
+      comment:[],
       viewcomments: false,
       addcomments: false
     }

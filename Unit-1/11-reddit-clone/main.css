@@ -6,6 +6,7 @@
 /* FORM VALIDATION */
 .has-error {
   color: rgb(155, 41, 41);
+  border-color: rgb(155, 41, 41);
 }
 
 /* SINGLE POST */
@@ -27,7 +28,7 @@ img {
   margin: 35px 0;
 }
 
-.bottom-text, .comments {
+.bottom-text, p.comment-single {
   font-size: .80rem;
 }
 

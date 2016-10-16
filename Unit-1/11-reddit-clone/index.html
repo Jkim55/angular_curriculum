@@ -46,10 +46,10 @@
     <!-- NEW POST FORM -->
     <div class="container">
       <div class="row" ng-model="view" ng-show="view.newPostForm">
-        <form ng-submit="submitNewPost(newPostForm)" name="newPostForm" novalidate>
+        <form name="newPostForm" ng-submit="submitNewPost(newPostForm)" novalidate>
           <div class="form-group">
             <label for="restaurant">Restaurant</label>
-            <input type="text" name="restaurant" class="form-control glowing-border"  ng-model="post.restaurant" placeholder="Title" required>
+            <input type="text" class="form-control glowing-border" name="restaurant" ng-model="post.restaurant" placeholder="Title" required>
             <p class= "has-error" ng-show="newPostForm.restaurant.$touched && newPostForm.restaurant.$invalid"><small>Input field is required.</small></p>
           </div>
 
@@ -115,7 +115,7 @@
                 {{post.comments.length}} comments
               </span>
               <span> | </span>
-              <span>
+              <span ng-click="toggleCommentForm()">
                 <i class="fa fa-pencil" aria-hidden="true"></i>
                 Add Comment
               </span>
@@ -123,16 +123,31 @@
           </div>
           <!-- If (comments.length = 0), don't show comments div -->
           <div class="comment-block" ng-show="post.viewcomments">
-            <div class="comments" ng-repeat="comment in post.comments">
+            <div ng-repeat="comment in post.comments">
               <p class="comment-single">
                 {{comment.author}} - {{comment.text}}
               </p>
             </div>
-            <!-- <div class="commentForm">
-          </div> -->
-        </div>
+          </div>
+
+          <div class="comment-block" ng-show="view.newcommentForm">
+            <form class="form-inline" name="commentForm" novalidate>
+
+              <div class="form-group">
+                <label for="author"><small>Name</small></label>
+                <input type="text" class="form-control form-control-sm" name="author" ng-model="post.comments.author" ng-class="{'has-error': commentForm.author.$touched && commentForm.author.$invalid}" placeholder="Your Name" required>
+              </div>
+              <div class="form-group">
+                <label for="text"><small>Comment</small></label>
+                <input type="text" class="form-control form-control-sm" name="text" ng-model="post.comments.text" ng-class="{'has-error': commentForm.text.$touched && commentForm.text.$invalid}" placeholder="Your comment" required>
+              </div>
+              <input type="submit" class="btn btn-secondary btn-sm" value="Submit Comment" ng-click="submitComment(commentForm, post)" ng-disabled="commentForm.$invalid">
+            </form>
+          </div>
+
         </div>
       </div>
+
     </div>
 
   <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular.js"></script>
