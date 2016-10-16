@@ -3,27 +3,32 @@ angular.module("redditCloneApp", ['angularMoment', 'ngAnimate'])
 angular.module("redditCloneApp").controller("redditController", ($scope) => {
 
   $scope.view = {}
-
   $scope.view.newPostForm = false
   $scope.view.newcommentForm = false
-  $scope.view.category = ""
-  $scope.view.categorydefault = "-votes"
+  $scope.view.category = null
+  $scope.view.categorysort = "-votes"
+  $scope.view.fuzzyFinder = ""
 
 // SORT DEFAULT IS BY VOTES
-  $scope.setSortCategory= (category) => {
-    console.log(category);
+  $scope.setSortCategory = (category) => {
     if (category === "restaurant"){
-      $scope.view.category = "restaurant"
+      $scope.view.category = "Restaurant"
+      $scope.view.categorysort = "restaurant"
     } else if (category === "chef"){
       $scope.view.category = "Chef"
+      $scope.view.categorysort = "chef"
     } else if (category === "votes"){
       $scope.view.category = "Votes"
+      $scope.view.categorysort = "-votes"
     } else if (category === "date"){
       $scope.view.category = "Date"
+      $scope.view.categorysort = "-date"
+
     }
   }
 
 
+// SUBMIT POST
   $scope.togglePostForm = () => {
     $scope.view.newPostForm = !$scope.view.newPostForm
   }
@@ -56,41 +61,39 @@ angular.module("redditCloneApp").controller("redditController", ($scope) => {
     $scope.togglePostForm()
   }
 
-  $scope.addNewComment = (post) => {
-    console.log("post #1", $scope.view.posts[0]);
-    let newComment = {
-      author: post.comments.author,
-      text: post.comments.text
-    }
-    console.log(newComment);
-    post.comments.push(newComment)
-  }
-
-  $scope.submitComment = (form, post) => {
-    $scope.addNewComment(post)
-    console.log(form);
-    form.$setPristine()
-    form.$setUntouched()
-    post.comments.author = "",
-    post.comments.text= "",
-    $scope.toggleCommentForm()
+// SUBMIT COMMENTS
+  $scope.toggleCommentForm = () => {
+    $scope.view.newcommentForm = !$scope.view.newcommentForm
   }
 
   $scope.toggleComments = (post) => {
     post.viewcomments = !post.viewcomments
   }
 
-  $scope.toggleCommentForm = () => {
-    $scope.view.newcommentForm = !$scope.view.newcommentForm
+  $scope.addNewComment = (post) => {
+    let newComment = {
+      author: post.comments.author,
+      text: post.comments.text
+    }
+    post.comments.push(newComment)
   }
 
+  $scope.submitComment = (form, post) => {
+    $scope.addNewComment(post)
+    form.$setPristine()
+    form.$setUntouched()
+    post.comments.author = "",
+    post.comments.text= "",
+    $scope.toggleCommentForm()
+    $scope.toggleComments(post)
+  }
+
+// COMMENTS
   $scope.voteUp= (post) => {
-    console.log(post.votes);
     post.votes++
   }
 
   $scope.voteDown= (post) => {
-    console.log(post.votes);
     post.votes--
   }
 

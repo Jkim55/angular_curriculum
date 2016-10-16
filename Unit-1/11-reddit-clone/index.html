@@ -25,7 +25,7 @@
         </li>
         <!-- SEARCH INPUT FORM -->
         <form class="nav-item">
-           <input class="form-control" type="text" placeholder="Search">
+           <input type="text" class="form-control" ng-model="view.fuzzyFinder" placeholder="Search">
         </form>
         <!-- SORT BY CATEGORY -->
         <li class="nav-item dropdown" ng-model="view">
@@ -82,7 +82,7 @@
       </div>
 
       <!-- VIEW ALL POSTS -->
-      <div class="all-posts row" ng-model="view" ng-repeat="post in view.posts | orderBy: view.categorydefault">
+      <div class="all-posts row" ng-model="view" ng-repeat="post in view.posts | orderBy: view.categorysort | filter: view.fuzzyFinder">
         <div class="card singlePost">
           <img ng-src="{{post.imageURL}}" alt="Card image">
           <div class="card-block">
