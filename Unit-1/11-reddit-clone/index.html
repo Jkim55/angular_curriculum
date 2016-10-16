@@ -105,16 +105,32 @@
           </div>
           <div class="bottom-text card-block">
             <p class="card-text">
-              <i class="fa fa-calendar" aria-hidden="true"></i>
-              {{post.date}} |
-              <i class="fa fa-comment" aria-hidden="true"></i>
-              {{post.comments}} |
-              <i class="fa fa-pencil" aria-hidden="true"></i>
-              Add Comment
+              <span>
+                  <i class="fa fa-calendar" aria-hidden="true"></i>
+                  {{post.date}}
+              </span>
+              <span> | </span>
+              <span ng-click="toggleComments(post)">
+                <i class="fa fa-comment" aria-hidden="true"></i>
+                {{post.comments.length}} comments
+              </span>
+              <span> | </span>
+              <span>
+                <i class="fa fa-pencil" aria-hidden="true"></i>
+                Add Comment
+              </span>
             </p>
-            <!-- <a href="#" class="card-link">Card link</a>
-            <a href="#" class="card-link">Another link</a> -->
           </div>
+          <!-- If (comments.length = 0), don't show comments div -->
+          <div class="comment-block" ng-show="post.viewcomments">
+            <div class="comments" ng-repeat="comment in post.comments">
+              <p class="comment-single">
+                {{comment.author}} - {{comment.text}}
+              </p>
+            </div>
+            <!-- <div class="commentForm">
+          </div> -->
+        </div>
         </div>
       </div>
     </div>

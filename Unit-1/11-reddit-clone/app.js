@@ -8,6 +8,7 @@ angular.module("redditCloneApp").controller("redditController", ($scope) => {
   $scope.view.category = ""
   $scope.view.categorydefault = "-date"
 
+// SORT DEFAULT IS BY VOTES
   $scope.setSortCategory= (category) => {
     console.log(category);
     if (category === "restaurant"){
@@ -35,11 +36,11 @@ angular.module("redditCloneApp").controller("redditController", ($scope) => {
       description: $scope.post.description,
       date: new Date(),
       votes: 0,
-      comments: 0,
+      comments: [],
       viewcomments: false,
       addcomments: false
     }
-    console.log($scope.view.posts);
+    console.log($scope.view.posts)
     $scope.view.posts.push(newPost)
   }
 
@@ -54,6 +55,20 @@ angular.module("redditCloneApp").controller("redditController", ($scope) => {
     $scope.togglePostForm()
   }
 
+  $scope.addComment = () => {
+    let newComment = {
+      author: "",
+      text: ""
+    }
+    console.log(newComment)
+    $scope.post.comments.push(newComment)
+  }
+
+  $scope.toggleComments = (post) => {
+    post.viewcomments = !post.viewcomments
+  }
+
+// SOME DUMMY DATA
   $scope.view.posts = [
     {
       restaurant: "Red Medicine",
@@ -63,7 +78,15 @@ angular.module("redditCloneApp").controller("redditController", ($scope) => {
       description: "Soko radicchio bunya nuts gram dulse silver beet parsnip napa cabbage lotus root sea lettuce brussels sprout cabbage. Catsear cauliflower garbanzo yarrow salsify chicory garlic bell pepper napa cabbage lettuce tomato kale arugula melon sierra leone bologi rutabaga tigernut. Sea lettuce gumbo grape kale kombu cauliflower salsify kohlrabi okra sea lettuce broccoli celery lotus root carrot winter purslane turnip greens garlic. JÃ­cama garlic courgette coriander radicchio plantain scallion cauliflower fava bean desert raisin spring onion chicory bunya nuts. Sea lettuce water spinach gram fava bean leek dandelion silver beet eggplant bush tomato.",
       date: "2016-10-15T07:35:34.693Z",
       votes: 4,
-      comments: 0,
+      comments:[{
+          author:"dasjfhkh",
+          text: "askdfjaksdf"
+        },
+        {
+          author:"aldkjflasz",
+          text: "dsfkjhakdsf"
+        }
+      ],
       viewcomments: false,
       addcomments: false
     },
@@ -74,8 +97,12 @@ angular.module("redditCloneApp").controller("redditController", ($scope) => {
       imageURL: "http://the-talks.com/wp-content/uploads/2016/01/Niki-Nakayama-02.jpg",
       description: "Nori grape silver beet broccoli kombu beet greens fava bean potato quandong celery. Bunya nuts black-eyed pea prairie turnip leek lentil turnip greens parsnip. Sea lettuce lettuce water chestnut eggplant winter purslane fennel azuki bean earthnut pea sierra leone bologi leek soko chicory celtuce parsley jÃ­cama salsify.",
       date: "2016-10-14T07:35:34.693Z",
-      votes: 1,
-      comments: 0,
+      votes: 3,
+      comments:[{
+          author: "rando",
+          text: "bladkfjglk"
+        }
+      ],
       viewcomments: false,
       addcomments: false
     },
@@ -86,11 +113,11 @@ angular.module("redditCloneApp").controller("redditController", ($scope) => {
       imageURL: "http://www.culinaryonline.cz/wp-content/uploads/2014/12/grant-achatz-alinea-05.jpg",
       description: "Beetroot water spinach okra water chestnut ricebean pea catsear courgette summer purslane. Water spinach arugula pea tatsoi aubergine spring onion bush tomato kale radicchio turnip chicory salsify pea sprouts fava bean. Dandelion zucchini burdock yarrow chickpea dandelion sorrel courgette turnip greens tigernut soybean radish artichoke wattle seed endive groundnut broccoli arugula.",
       date: "2016-09-27T07:35:34.693Z",
-      votes: -2,
-      comments: 0,
+      votes: 0,
+      comments:[],
       viewcomments: false,
       addcomments: false
-    },
+    }
   ]
 
 })
