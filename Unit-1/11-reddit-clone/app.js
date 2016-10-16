@@ -1,4 +1,4 @@
-angular.module("redditCloneApp", ["ngAnimate"])
+angular.module("redditCloneApp", ['angularMoment', 'ngAnimate'])
 
 angular.module("redditCloneApp").controller("redditController", ($scope) => {
 
@@ -35,13 +35,12 @@ angular.module("redditCloneApp").controller("redditController", ($scope) => {
       author: $scope.post.author,
       imageURL: $scope.post.imageURL,
       description: $scope.post.description,
-      date: new Date(),
+      date: new Date().getTime(),
       votes: 0,
       comments: [],
       viewcomments: false,
       addcomments: false
     }
-    console.log($scope.view.posts)
     $scope.view.posts.push(newPost)
   }
 
@@ -76,11 +75,23 @@ angular.module("redditCloneApp").controller("redditController", ($scope) => {
     post.comments.text= "",
     $scope.toggleCommentForm()
   }
+
   $scope.toggleComments = (post) => {
     post.viewcomments = !post.viewcomments
   }
+
   $scope.toggleCommentForm = () => {
     $scope.view.newcommentForm = !$scope.view.newcommentForm
+  }
+
+  $scope.voteUp= (post) => {
+    console.log(post.votes);
+    post.votes++
+  }
+
+  $scope.voteDown= (post) => {
+    console.log(post.votes);
+    post.votes--
   }
 
 // SOME DUMMY DATA

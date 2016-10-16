@@ -6,12 +6,16 @@
 /* FORM VALIDATION */
 .has-error {
   color: rgb(155, 41, 41);
-  border-color: rgb(155, 41, 41);
+  border-color: rgb(229, 71, 71);
 }
 
-/* SINGLE POST */
-.singlePost {
-  /*background-color: rgba(17, 16, 16, .3);*/
+/* POSTS GENERAL */
+.all-posts {
+  margin: 35px 0;
+}
+
+.post-text {
+  padding: 10px 10px 10px 50px;
 }
 
 img {
@@ -20,18 +24,25 @@ img {
   object-fit: cover;
 }
 
-.post-text {
-  padding: 10px 10px 10px 50px;
-}
-
-.all-posts {
-  margin: 35px 0;
+.singlePost {
+  /*background-color: rgba(17, 16, 16, .3);*/
 }
 
 .bottom-text, p.comment-single {
   font-size: .80rem;
+  color: rgb(129, 138, 145);
 }
 
+/* POST VOTES */
+.green {
+  color: rgb(41, 153, 87);
+}
+
+.red {
+  color: rgb(229, 71, 71);
+}
+
+/* POST COMMENTS */
 .comment-block {
   padding: 0 1.25rem 1.25rem 1.25rem
 }
@@ -39,5 +50,4 @@ img {
 p.comment-single {
   padding: 0;
   margin: 0;
-  color: rgb(105, 109, 112)
 }

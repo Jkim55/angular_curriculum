@@ -49,31 +49,31 @@
         <form name="newPostForm" ng-submit="submitNewPost(newPostForm)" novalidate>
           <div class="form-group">
             <label for="restaurant">Restaurant</label>
-            <input type="text" class="form-control glowing-border" name="restaurant" ng-model="post.restaurant" placeholder="Title" required>
+            <input type="text" class="form-control" name="restaurant" ng-model="post.restaurant" ng-class="{'has-error': newPostForm.restaurant.$touched && newPostForm.restaurant.$invalid}" placeholder="Title" required>
             <p class= "has-error" ng-show="newPostForm.restaurant.$touched && newPostForm.restaurant.$invalid"><small>Input field is required.</small></p>
           </div>
 
           <div class="form-group">
             <label for="chef">Chef</label>
-            <input type="text" name="chef" class="form-control glowing-border"  ng-model="post.chef" placeholder="Title" required>
+            <input type="text" class="form-control" name="chef"  ng-model="post.chef" ng-class="{'has-error': newPostForm.chef.$touched && newPostForm.chef.$invalid}" placeholder="Title" required>
             <p class= "has-error" ng-show="newPostForm.chef.$touched && newPostForm.chef.$invalid"><small>Input field is required.</small></p>
           </div>
 
           <div class="form-group">
             <label for="author">Author</label>
-            <input type="text" class="form-control" name="author" ng-model="post.author" placeholder="Author" required>
+            <input type="text" class="form-control" name="author" ng-model="post.author" ng-class="{'has-error': newPostForm.author.$touched && newPostForm.author.$invalid}" placeholder="Author" required>
             <p class="has-error"   ng-show="newPostForm.author.$touched && newPostForm.author.$invalid"><small>Input field is required.</small></p>
           </div>
 
           <div class="form-group">
             <label for="image-url">Image URL</label>
-            <input type="text" class="form-control" name="imageURL" ng-model="post.imageURL" placeholder="Image URL" required>
+            <input type="text" class="form-control" name="imageURL" ng-model="post.imageURL" ng-class="{'has-error': newPostForm.imageURL.$touched && newPostForm.imageURL.$invalid}" placeholder="Image URL" required>
             <p class= "has-error" ng-show="newPostForm.imageURL.$touched && newPostForm.imageURL.$invalid"><small>Input field is required.</small></p>
           </div>
 
           <div class="form-group">
             <label for="description">Description</label>
-            <textarea class="form-control" name="description" rows="4" ng-model="post.description" placeholder="Description" required></textarea>
+            <textarea class="form-control" name="description" rows="4" ng-model="post.description" ng-class="{'has-error': newPostForm.description.$touched && newPostForm.description.$invalid}" placeholder="Description" required></textarea>
             <p class= "has-error" ng-show="newPostForm.description.$touched && newPostForm.description.$invalid"><small>Input field is required.</small></p>
           </div>
 
@@ -93,9 +93,13 @@
               {{post.author}}
             </h6>
             <div>
-              <i class="fa fa-arrow-up" aria-hidden="true"></i>
-              <i class="fa fa-arrow-down" aria-hidden="true"></i>
-              {{post.votes}}
+              <span ng-click="voteUp(post)">
+                <i class="fa fa-arrow-up" aria-hidden="true"></i>
+              </span>
+              <span ng-click="voteDown(post)">
+                <i class="fa fa-arrow-down" aria-hidden="true"></i>
+              </span>
+              <span ng-class="{green: post.votes > 0, red: post.votes < 0}">{{post.votes}}</span>
             </div>
           </div>
           <div class="card-block">
@@ -105,11 +109,15 @@
           </div>
           <div class="bottom-text card-block">
             <p class="card-text">
+
               <span>
                   <i class="fa fa-calendar" aria-hidden="true"></i>
-                  {{post.date}}
+                  <span>
+                  {{ post.date | amCalendar }}</span>
               </span>
+
               <span> | </span>
+
               <span ng-click="toggleComments(post)">
                 <i class="fa fa-comment" aria-hidden="true"></i>
                 {{post.comments.length}}
@@ -118,7 +126,9 @@
                   '1': 'comment',
                   'other': 'comments'}">
               </span>
+
               <span> | </span>
+
               <span ng-click="toggleCommentForm()">
                 <i class="fa fa-pencil" aria-hidden="true"></i>
                 Add Comment
@@ -145,7 +155,7 @@
                 <label for="text"><small>Comment</small></label>
                 <input type="text" class="form-control form-control-sm" name="text" ng-model="post.comments.text" ng-class="{'has-error': commentForm.text.$touched && commentForm.text.$invalid}" placeholder="Your comment" required>
               </div>
-              <input type="submit" class="btn btn-secondary btn-sm" value="Submit Comment" ng-click="submitComment(commentForm, post)" ng-disabled="commentForm.$invalid">
+              <input type="submit" class="btn btn-secondary btn-sm" value="Submit" ng-click="submitComment(commentForm, post)" ng-disabled="commentForm.$invalid">
             </form>
           </div>
 
@@ -154,11 +164,14 @@
 
     </div>
 
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.0.0/jquery.min.js" integrity="sha384-THPy051/pYDQGanwU6poAc/hOdQxjnOEXzbT+OuUAFqNqFjL+4IGLBgCJC3ZOShY" crossorigin="anonymous"></script>
   <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular.js"></script>
   <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular-animate.js"></script>
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.0.0/jquery.min.js" integrity="sha384-THPy051/pYDQGanwU6poAc/hOdQxjnOEXzbT+OuUAFqNqFjL+4IGLBgCJC3ZOShY" crossorigin="anonymous"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.2.0/js/tether.min.js" integrity="sha384-Plbmg8JY28KFelvJVai01l8WyZzrYWG825m+cZ0eDDS1f7d/js6ikvy1+X+guPIB" crossorigin="anonymous"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.4/js/bootstrap.min.js" integrity="sha384-VjEeINv9OSwtWFLAtmc4JCtEJXXBub00gtSnszmspDLCtC0I4z4nqz7rEFbIZLLU" crossorigin="anonymous"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular-animate.js"></script>
+  <script src="https://cdn.jsdelivr.net/momentjs/2.14.1/moment.min.js" charset="utf-8"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-moment/0.10.3/angular-moment.min.js" charset="utf-8"></script>
   <script type="text/javascript" src="app.js"></script>
   </body>
 </html>
