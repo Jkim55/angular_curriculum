@@ -23,7 +23,6 @@ angular.module("redditCloneApp").controller("redditController", ($scope) => {
     } else if (category === "date"){
       $scope.view.category = "Date"
       $scope.view.categorysort = "-date"
-
     }
   }
 
