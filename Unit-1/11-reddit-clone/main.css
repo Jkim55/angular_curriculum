@@ -3,6 +3,34 @@
   opacity: 0;
 }
 
+/* ANIMATION */
+.ng-enter {
+  transition:0.6s ease all;
+  opacity:0;
+  /*transform:translateY(100%);*/
+}
+
+.ng-leave {
+transition:0.6s ease all;
+opacity:1;
+/*transform:translateY(0);*/
+}
+
+.ng-enter.ng-enter-active {
+  opacity:1;
+  /*transform:translateY(0);*/
+}
+
+.ng-leave.ng-leave-active {
+opacity:0;
+/*transform:translateY(100%);*/
+}
+
+.ng-enter-stagger, .ng-leave-stagger {
+  transition-delay: 0.10s;
+  transition-duration:0;
+}
+
 /* FORM VALIDATION */
 .has-error {
   color: rgb(155, 41, 41);
