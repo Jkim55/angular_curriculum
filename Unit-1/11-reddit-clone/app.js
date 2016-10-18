@@ -6,7 +6,7 @@ angular.module("redditCloneApp").controller("redditController", ($scope) => {
   $scope.view.newPostForm = false
   $scope.view.newcommentForm = false
   $scope.view.category = null
-  $scope.view.categorysort = "-votes"
+  $scope.view.categorysort = "-votes" // better way to do this?
   $scope.view.fuzzyFinder = ""
 
 // SORT DEFAULT IS BY VOTES
@@ -39,7 +39,7 @@ angular.module("redditCloneApp").controller("redditController", ($scope) => {
       author: $scope.post.author,
       imageURL: $scope.post.imageURL,
       description: $scope.post.description,
-      date: new Date().getTime(),
+      date: new Date(),
       votes: 0,
       comments: [],
       viewcomments: false,
@@ -61,8 +61,8 @@ angular.module("redditCloneApp").controller("redditController", ($scope) => {
   }
 
 // SUBMIT COMMENTS
-  $scope.toggleCommentForm = () => {
-    $scope.view.newcommentForm = !$scope.view.newcommentForm
+  $scope.toggleCommentForm = (post) => {
+    post.newcommentForm = !post.newcommentForm
   }
 
   $scope.toggleComments = (post) => {
@@ -72,7 +72,8 @@ angular.module("redditCloneApp").controller("redditController", ($scope) => {
   $scope.addNewComment = (post) => {
     let newComment = {
       author: post.comments.author,
-      text: post.comments.text
+      text: post.comments.text,
+      date: new Date()
     }
     post.comments.push(newComment)
   }
@@ -81,7 +82,7 @@ angular.module("redditCloneApp").controller("redditController", ($scope) => {
     $scope.addNewComment(post)
     form.$setPristine()
     form.$setUntouched()
-    post.comments.author = "",
+    post.comments.author = "", // better way to do this?
     post.comments.text= "",
     $scope.toggleCommentForm()
     $scope.toggleComments(post)
@@ -108,11 +109,14 @@ angular.module("redditCloneApp").controller("redditController", ($scope) => {
       votes: 6,
       comments:[{
           author:"dasjfhkh",
-          text: "askdfjaksdfadd"
+          text: "askdfjaksdfadd",
+          date: "2016-10-16T07:35:34.693Z"
         },
         {
           author:"aldkjflasz",
-          text: "dsfkjhakdsf"
+          text: "dsfkjhakdsf",
+          date: "2016-10-16T07:45:34.693Z"
+
         }
       ],
       viewcomments: false,
@@ -123,12 +127,13 @@ angular.module("redditCloneApp").controller("redditController", ($scope) => {
       chef: "Niki Nakayama",
       author: "M. Lee",
       imageURL: "./img/Niki-Nakayama-nnaka.jpg",
-      description: "Nori grape silver beet broccoli kombu beet greens fava bean potato quandong celery. Bunya nuts black-eyed pea prairie turnip leek lentil turnip greens parsnip. Sea lettuce lettuce water chestnut eggplant winter purslane fennel azuki bean earthnut pea sierra leone bologi leek soko chicory celtuce parsley jÃ­cama salsify.",
+      description: "Nori grape silver beet broccoli kombu beet greens fava bean potato quandong celery. Bunya nuts black-eyed pea prairie turnip leek lentil turnip greens parsnip. Sea lettuce lettuce water chestnut eggplant winter purslane fennel azuki bean earthnut pea sierra leone bologi leek soko chicory celtuce parsley jicama salsify.",
       date: "2016-10-14T07:35:34.693Z",
       votes: 3,
       comments:[{
           author: "rando",
-          text: "bladkfjglk"
+          text: "bladkfjglk",
+          date: "2016-10-17T07:35:34.693Z"
         }
       ],
       viewcomments: false,
@@ -140,7 +145,7 @@ angular.module("redditCloneApp").controller("redditController", ($scope) => {
       author: "L. Tran",
       imageURL: "./img/grant-achatz-alinea.jpg",
       description: "Beetroot water spinach okra water chestnut ricebean pea catsear courgette summer purslane. Water spinach arugula pea tatsoi aubergine spring onion bush tomato kale radicchio turnip chicory salsify pea sprouts fava bean. Dandelion zucchini burdock yarrow chickpea dandelion sorrel courgette turnip greens tigernut soybean radish artichoke wattle seed endive groundnut broccoli arugula.",
-      date: "2016-09-27T07:35:34.693Z",
+      date: "2016-10-10T07:35:34.693Z",
       votes: 4,
       comments:[],
       viewcomments: false,

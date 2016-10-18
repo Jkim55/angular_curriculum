@@ -9,6 +9,7 @@
     <link rel="stylesheet" href="main.css" media="screen" title="no title">
   </head>
   <body ng-controller="redditController" ng-cloak>
+
     <!-- NAV BAR -->
     <nav class="navbar navbar-light bg-faded">
       <ul class="nav navbar-nav">
@@ -112,8 +113,7 @@
 
               <span>
                   <i class="fa fa-calendar" aria-hidden="true"></i>
-                  <span>
-                  {{ post.date | amCalendar }}</span>
+                  <span>{{post.date | amCalendar}}</span>
               </span>
 
               <span> | </span>
@@ -129,7 +129,7 @@
 
               <span> | </span>
 
-              <span ng-click="toggleCommentForm()">
+              <span ng-click="toggleCommentForm(post)">
                 <i class="fa fa-pencil" aria-hidden="true"></i>
                 Add Comment
               </span>
@@ -138,13 +138,18 @@
 
           <div class="comment-block" ng-show="post.viewcomments && post.comments.length > 0">
             <div ng-repeat="comment in post.comments">
-              <p class="comment-single">
-                {{comment.author}} - {{comment.text}}
-              </p>
+              <div class="comment-single">
+                <p>
+                  {{comment.author}} - {{comment.text}}
+                </p>
+                <p>
+                  Commented on {{comment.date | amDateFormat:'MM.D.YY @ h:mm a'}}
+                </p>
+              </div>
             </div>
           </div>
 
-          <div class="comment-block" ng-show="view.newcommentForm">
+          <div class="comment-block" ng-show="post.newcommentForm">
             <form class="form-inline" name="commentForm" novalidate>
 
               <div class="form-group">
@@ -161,6 +166,8 @@
         </div>
       </div>
     </div>
+
+
     <!-- Footer  -->
     <nav class="navbar navbar-light bg-faded ">
         <a class="footer" href="https://github.com/Jkim55/nomadic" target="blank"><small>See this project on <i class="fa fa-github fa-lg"></i>  </small></a>
