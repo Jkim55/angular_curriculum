@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html ng-app="httpApp">
+  <head>
+    <meta charset="utf-8">
+    <title>Unit 2 - Lesson 6</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular.js"></script>
+  </head>
+  <body ng-controller="httpController">
+    <!-- <p>
+      {{view.zenData}}
+    </p> -->
+    <!-- <p>
+      {{view.itunesData}}
+    </p> -->
+    <p ng-repeat="message in messages.data">{{ message.content }}, {{ message.name}}
+    </p>
+  <script type="text/javascript" src="app.js"></script>
+  </body>
+</html>

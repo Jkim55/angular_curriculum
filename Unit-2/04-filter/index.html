@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html ng-app="myApp">
+  <head>
+    <meta charset="utf-8">
+    <title>Unit 2 - Lesson 4</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular.js"></script>
+  </head>
+  <body ng-controller="namesCtrl">
+    <ul>
+      <li ng-repeat="x in names">
+          {{x | myFormat}}
+      </li>
+    </ul>
+    <ul>
+      <li ng-repeat="x in snakecases">
+          {{x | kebab}}
+      </li>
+    </ul>
+    <ul>
+      <li ng-repeat="x in caps">
+          {{x | capitalize: 3}}
+      </li>
+    </ul>
+    <p>
+      {{ sentence | redact: 'tte'}}
+    </p>
+    <script type="text/javascript" src="app.js"></script>
+  </body>
+</html>

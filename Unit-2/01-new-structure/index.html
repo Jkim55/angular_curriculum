@@ -6,10 +6,9 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.4/css/bootstrap.min.css" integrity="sha384-2hfp1SzUoho7/TsGGGDaFdsuuDL0LX2hnUp6VkX3CUQ2K4K+xjboZdsXyp4oUHZj" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.4.0/animate.min.css">
     <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-T8Gy5hrqNKT+hzMclPo118YTQO6cYprQmhrYwIiQ/3axmI1hQomh7Ud2hPOy8SP1" crossorigin="anonymous">
-    <link rel="stylesheet" href="main.css" media="screen" title="no title">
+    <link rel="stylesheet" href="./css/main.css" media="screen" title="no title">
   </head>
   <body ng-controller="redditController" ng-cloak>
-
     <!-- NAV BAR -->
     <nav class="navbar navbar-light bg-faded">
       <ul class="nav navbar-nav">
@@ -113,7 +112,7 @@
 
               <span>
                   <i class="fa fa-calendar" aria-hidden="true"></i>
-                  <span>{{post.date | amCalendar}}</span>
+                  <span>{{post.date | amCalendar:referenceTime:formats}}</span>
               </span>
 
               <span> | </span>
@@ -129,7 +128,7 @@
 
               <span> | </span>
 
-              <span ng-click="toggleCommentForm(post)">
+              <span ng-click="toggleCommentForm()">
                 <i class="fa fa-pencil" aria-hidden="true"></i>
                 Add Comment
               </span>
@@ -138,18 +137,13 @@
 
           <div class="comment-block" ng-show="post.viewcomments && post.comments.length > 0">
             <div ng-repeat="comment in post.comments">
-              <div class="comment-single">
-                <p>
-                  {{comment.author}} - {{comment.text}}
-                </p>
-                <p>
-                  Commented on {{comment.date | amDateFormat:'MM.D.YY @ h:mm a'}}
-                </p>
-              </div>
+              <p class="comment-single">
+                {{comment.author}} - {{comment.text}}
+              </p>
             </div>
           </div>
 
-          <div class="comment-block" ng-show="post.newcommentForm">
+          <div class="comment-block" ng-show="view.newcommentForm">
             <form class="form-inline" name="commentForm" novalidate>
 
               <div class="form-group">
@@ -166,8 +160,6 @@
         </div>
       </div>
     </div>
-
-
     <!-- Footer  -->
     <nav class="navbar navbar-light bg-faded ">
         <a class="footer" href="https://github.com/Jkim55/nomadic" target="blank"><small>See this project on <i class="fa fa-github fa-lg"></i>  </small></a>
@@ -179,8 +171,9 @@
   <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular-animate.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.2.0/js/tether.min.js" integrity="sha384-Plbmg8JY28KFelvJVai01l8WyZzrYWG825m+cZ0eDDS1f7d/js6ikvy1+X+guPIB" crossorigin="anonymous"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.4/js/bootstrap.min.js" integrity="sha384-VjEeINv9OSwtWFLAtmc4JCtEJXXBub00gtSnszmspDLCtC0I4z4nqz7rEFbIZLLU" crossorigin="anonymous"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular-animate.js"></script>
   <script src="https://cdn.jsdelivr.net/momentjs/2.14.1/moment.min.js" charset="utf-8"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-moment/0.10.3/angular-moment.min.js" charset="utf-8"></script>
-  <script type="text/javascript" src="app.js"></script>
+  <script type="text/javascript" src="./js/app.js"></script>
   </body>
 </html>
