@@ -10,6 +10,10 @@ angular.module('movieApp').config(function($routeProvider, $locationProvider) {
       templateUrl: 'partials/singleMovie.html',
       controller: 'singleMovieController'
     })
-    .otherwise({ redirectTo: '/' });
+    .when('/:title', {
+      templateUrl: 'partials/results.html',
+      controller: 'resultsController'
+    })
+    .otherwise('/nope');
   $locationProvider.html5Mode(true);
 })

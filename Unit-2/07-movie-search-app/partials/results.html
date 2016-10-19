@@ -1,0 +1,21 @@
+<h1>Angular OMDb API Search</h1>
+
+<h3>Search for Movie by Title</h3>
+
+<form class="" name="mainSearch" ng-submit="getMovies()">
+  <input type="text" placeholder="Seven Samurai" ng-model="view.searchInput">
+  <input type="submit" class="btn btn-primary" value="Submit">
+</form>
+
+<div ng-show= 'view.error'>
+  {{ view.error }}
+</div>
+
+<div ng-repeat="movie in view.movies" ng-show= 'view.movies'>
+  <a ng-href="/movie/{{ movie.imdbID}}">
+    <div>
+      <h3>{{ movie.Title }}</h3>
+      <p> {{ movie.Year }} </p>
+    </div>
+  </a>
+</div>

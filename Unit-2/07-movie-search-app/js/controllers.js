@@ -1,26 +1,39 @@
 
 
-angular.module('movieApp').controller('searchController', (function ($scope, $http, $location) {
-  $scope.view = {}
-  $scope.view.searchValue = ""
-  $scope.view.movies = null
-  $scope.view.error = null
+angular.module('movieApp').controller('searchController', (function ($scope, $http, $location, $routeParams){
+  $scope.view = {
+    searchValue:""
+  }
+  $scope.getMovies = () => {
+    $location.path(`${$scope.view.searchValue}`)
+  }
+}))
 
-  $scope.getMovies = (searchTerm) => {
-    let searchURL = `http://www.omdbapi.com/?s=${searchTerm}`
-    $scope.view.movies = null
-    $scope.view.error = null
-    $http.get(searchURL)
-      .then((results) => {
-        if (results.data.Search === undefined){
-          $scope.view.error = "No movies were found for the search term"
-        } else {
-          $scope.view.movies = results.data.Search
-        }
-      })
-      .catch ((err) => {
-        console.log(`There was an error ${err}`);
-      })
+angular.module('movieApp').controller('resultsController', (function ($scope, $http, $location, $routeParams) {
+  $scope.view = {
+    movies: null,
+    error: null,
+    searchInput: $routeParams.title || ""
+  }
+
+  let movieTitle = $routeParams.title;
+  let searchURL = `http://www.omdbapi.com/?s=${movieTitle}`
+  $http.get(searchURL)
+  .then((results) => {
+    if (results.data.Search === undefined){
+
+      $scope.view.error = "No movies were found for the search term"
+    } else {
+      $scope.view.movies = results.data.Search
+      console.log($scope.view.movies);
+    }
+  })
+  .catch ((err) => {
+    console.log(`There was an error ${err}`);
+  })
+
+  $scope.getMovies = () => {
+    $location.path(`${$scope.view.searchInput }`)
   }
 }))
 
