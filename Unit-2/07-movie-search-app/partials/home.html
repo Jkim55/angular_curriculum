@@ -7,10 +7,13 @@
   <input type="submit" class="btn btn-primary" value="Submit">
 </form>
 
+<div ng-show="view.error">
+  {{ view.error }}
+</div>
 
-<div ng-repeat="movie in view.movies">
-  <a ng-href="/movie/{{ movie.imdbID }}">
-    <div class="">
+<div ng-repeat="movie in view.movies" ng-show= "view.movies">
+  <a ng-href="/movie/{{ movie.imdbID}}">
+    <div>
       <h3>{{ movie.Title }}</h3>
       <p> {{ movie.Year }} </p>
     </div>
