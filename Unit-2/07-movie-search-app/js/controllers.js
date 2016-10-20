@@ -1,5 +1,3 @@
-
-
 angular.module('movieApp').controller('searchController', (function ($scope, $http, $location, $routeParams){
   $scope.view = {
     searchValue:""
@@ -13,19 +11,17 @@ angular.module('movieApp').controller('resultsController', (function ($scope, $h
   $scope.view = {
     movies: null,
     error: null,
-    searchInput: $routeParams.title || ""
+    searchInput: $routeParams.searchTerm || ""
   }
 
-  let movieTitle = $routeParams.title;
+  let movieTitle = $routeParams.searchTerm
   let searchURL = `http://www.omdbapi.com/?s=${movieTitle}`
   $http.get(searchURL)
   .then((results) => {
     if (results.data.Search === undefined){
-
       $scope.view.error = "No movies were found for the search term"
     } else {
       $scope.view.movies = results.data.Search
-      console.log($scope.view.movies);
     }
   })
   .catch ((err) => {
@@ -51,3 +47,5 @@ angular.module('movieApp').controller('singleMovieController', function($scope, 
       console.log(`There was an error ${err}`);
     })
 })
+
+// if "N/A" for poster, insert in a diff image
