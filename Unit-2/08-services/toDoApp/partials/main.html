@@ -1,0 +1,25 @@
+<h1>Angular To Do App</h1>
+<form name="addForm" ng-submit=addItem(addForm)>
+  <label for="toDoItem">Add a New To Do</label>
+  <input
+  type="text" name="item" id="toDoItem" ng-model="view.toDoItem" ng-minlength="1" ng-class="{'has-error': addForm.item.$invalid && addForm.item.$dirty}" required>
+  <input type="submit" value="Add To Do" ng-disabled="addForm.$invalid">
+</form>
+<div class="error message" ng-show="addForm.item.$invalid && addForm.item.$dirty">
+  <p>Please Enter a To Do.</p>
+</div>
+
+<div class="toDoList" ng-repeat="item in view.toDoList track by $index">
+  <span> {{ item.description }}</span>
+  <button type="button" name="edit" ng-click="toggleEditForm(item)">Edit</button>
+  <button type="button" name="delete" ng-click="deleteItem($index)">&#10005;</button>
+  <form name='editForm'ng-show="item.edit" ng-submit="editItem(item, $index)">
+    {{ item }}
+    <input type="text" name='item' value="{{item.description}}" ng-model="item.description"
+    ng-minlength="1" ng-class="{'has-error': editForm.item.$invalid && editForm.item.$dirty}" required>
+    <input type="submit" value="Submit" ng-disabled="editForm.$invalid">
+  </form>
+  <div class="error message" ng-show="editForm.item.$invalid && editForm.item.$dirty">
+    <p>Field cannot be blank</p>
+  </div>
+</div>
