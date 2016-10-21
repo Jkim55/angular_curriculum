@@ -2,7 +2,7 @@ angular.module('toDoApp').controller('toDoController', function ($scope, toDoSer
   $scope.view = {}
   $scope.view.toDoItem = ''
   $scope.view.toDoEditItem = ''
-  $scope.view.toDoList = toDoService.getList()
+  $scope.view.toDoList = toDoService.toDoList
 
   $scope.addItem = (form) => {
     let singleItem = toDoService.addItem($scope.view.toDoItem)
@@ -15,8 +15,7 @@ angular.module('toDoApp').controller('toDoController', function ($scope, toDoSer
   }
 
   $scope.editItem = (item, index) => {
-    console.log(item);
-    toDoService.editItem(item, index)
+    toDoService.editItem($scope.view.toDoEditItem, index)
     item.edit = false
   }
 

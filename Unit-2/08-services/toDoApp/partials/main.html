@@ -1,12 +1,16 @@
 <h1>Angular To Do App</h1>
-<form name="addForm" ng-submit=addItem(addForm)>
-  <label for="toDoItem">Add a New To Do</label>
-  <input
-  type="text" name="item" id="toDoItem" ng-model="view.toDoItem" ng-minlength="1" ng-class="{'has-error': addForm.item.$invalid && addForm.item.$dirty}" required>
-  <input type="submit" value="Add To Do" ng-disabled="addForm.$invalid">
-</form>
-<div class="error message" ng-show="addForm.item.$invalid && addForm.item.$dirty">
-  <p>Please Enter a To Do.</p>
+
+<div>
+  <form name="addForm" ng-submit=addItem(addForm)>
+    <label for="toDoItem">Add a New To Do</label>
+    <input
+    type="text" name="item" id="toDoItem" ng-model="view.toDoItem" ng-minlength="1" ng-class="{'has-error': addForm.item.$invalid && addForm.item.$dirty}" required>
+    <input type="submit" value="Add To Do" ng-disabled="addForm.$invalid">
+  </form>
+
+  <div class="error message" ng-show="addForm.item.$invalid && addForm.item.$dirty">
+    <p>Please Enter a To Do.</p>
+  </div>
 </div>
 
 <div class="toDoList" ng-repeat="item in view.toDoList track by $index">
@@ -15,7 +19,7 @@
   <button type="button" name="delete" ng-click="deleteItem($index)">&#10005;</button>
   <form name='editForm'ng-show="item.edit" ng-submit="editItem(item, $index)">
     {{ item }}
-    <input type="text" name='item' value="{{item.description}}" ng-model="item.description"
+    <input type="text" name='item' ng-model="view.toDoEditItem" ng-value="item.description"
     ng-minlength="1" ng-class="{'has-error': editForm.item.$invalid && editForm.item.$dirty}" required>
     <input type="submit" value="Submit" ng-disabled="editForm.$invalid">
   </form>
